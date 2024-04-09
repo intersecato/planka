@@ -14,6 +14,13 @@ module.exports = {
       regex: /^[0-9]+$/,
       required: true,
     },
+    position: {
+      type: 'number',
+      required: true,
+    },
+    name: {
+      type: 'string',
+    },
   },
 
   exits: {
@@ -28,7 +35,7 @@ module.exports = {
   async fn(inputs) {
     const { currentUser } = this.req;
 
-    let { card } = await sails.helpers.cards
+    const { card, list, board } = await sails.helpers.cards
       .getProjectPath(inputs.id)
       .intercept('pathNotFound', () => Errors.CARD_NOT_FOUND);
 
@@ -45,18 +52,31 @@ module.exports = {
       throw Errors.NOT_ENOUGH_RIGHTS;
     }
 
-    card = await sails.helpers.cards.deleteOne.with({
+    const values = _.pick(inputs, ['position', 'name']);
+
+    const {
+      card: nextCard,
+      cardMemberships,
+      cardLabels,
+      tasks,
+    } = await sails.helpers.cards.duplicateOne.with({
+      board,
+      list,
       record: card,
-      user: currentUser,
+      values: {
+        ...values,
+        creatorUser: currentUser,
+      },
       request: this.req,
     });
 
-    if (!card) {
-      throw Errors.CARD_NOT_FOUND;
-    }
-
     return {
-      item: card,
+      item: nextCard,
+      included: {
+        cardMemberships,
+        cardLabels,
+        tasks,
+      },
     };
   },
 };
