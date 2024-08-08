@@ -38,7 +38,6 @@ WORKDIR /app
 
 COPY --chown=node:node start.sh .
 COPY --chown=node:node server .
-COPY --chown=node:node healthcheck.js .
 
 RUN mv .env.sample .env
 
@@ -52,9 +51,6 @@ VOLUME /app/public/project-background-images
 VOLUME /app/private/attachments
 
 EXPOSE 1337
-
-HEALTHCHECK --interval=10s --timeout=2s --start-period=15s \
-  CMD node ./healthcheck.js
 
 
 CMD [ "bash", "start.sh" ]
