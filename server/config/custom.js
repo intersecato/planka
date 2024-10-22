@@ -27,6 +27,9 @@ module.exports.custom = {
 
   tokenExpiresIn: parseInt(process.env.TOKEN_EXPIRES_IN, 10) || 365,
 
+  // Location to receive uploaded files in. Default (non-string value) is a Sails-specific location.
+  fileUploadTmpDir: null,
+
   userAvatarsPath: path.join(sails.config.paths.public, 'user-avatars'),
   userAvatarsUrl: `${process.env.BASE_URL}/user-avatars`,
 
@@ -52,6 +55,7 @@ module.exports.custom = {
   oidcResponseMode: process.env.OIDC_RESPONSE_MODE || 'fragment',
   oidcUseDefaultResponseMode: process.env.OIDC_USE_DEFAULT_RESPONSE_MODE === 'true',
   oidcAdminRoles: process.env.OIDC_ADMIN_ROLES ? process.env.OIDC_ADMIN_ROLES.split(',') : [],
+  oidcClaimsSource: process.env.OIDC_CLAIMS_SOURCE || 'userinfo',
   oidcEmailAttribute: process.env.OIDC_EMAIL_ATTRIBUTE || 'email',
   oidcNameAttribute: process.env.OIDC_NAME_ATTRIBUTE || 'name',
   oidcUsernameAttribute: process.env.OIDC_USERNAME_ATTRIBUTE || 'preferred_username',
@@ -72,6 +76,7 @@ module.exports.custom = {
   smtpUser: process.env.SMTP_USER,
   smtpPassword: process.env.SMTP_PASSWORD,
   smtpFrom: process.env.SMTP_FROM,
+  smtpTlsRejectUnauthorized: process.env.SMTP_TLS_REJECT_UNAUTHORIZED !== 'false',
 
   webhooks: JSON.parse(process.env.WEBHOOKS || '[]'), // TODO: validate structure
 

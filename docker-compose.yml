@@ -44,6 +44,7 @@ services:
       # - OIDC_RESPONSE_MODE=fragment
       # - OIDC_USE_DEFAULT_RESPONSE_MODE=true
       # - OIDC_ADMIN_ROLES=admin
+      # - OIDC_CLAIMS_SOURCE=userinfo
       # - OIDC_EMAIL_ATTRIBUTE=email
       # - OIDC_NAME_ATTRIBUTE=name
       # - OIDC_USERNAME_ATTRIBUTE=preferred_username
@@ -60,6 +61,7 @@ services:
       # - SMTP_USER=
       # - SMTP_PASSWORD=
       # - SMTP_FROM="Demo Demo" <demo@demo.demo>
+      # - SMTP_TLS_REJECT_UNAUTHORIZED=false
 
       # Optional fields: accessToken, events, excludedEvents
       # - |
@@ -78,7 +80,7 @@ services:
         condition: service_healthy
 
   postgres:
-    image: postgres:14-alpine
+    image: postgres:16-alpine
     restart: on-failure
     volumes:
       - db-data:/var/lib/postgresql/data

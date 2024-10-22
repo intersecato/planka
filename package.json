@@ -1,6 +1,6 @@
 {
   "name": "planka",
-  "version": "1.22.0",
+  "version": "1.23.3",
   "private": true,
   "homepage": "https://plankanban.github.io/planka",
   "repository": {
@@ -32,7 +32,7 @@
     "test": "npm run server:test && npm run client:test"
   },
   "lint-staged": {
-    "client/**/*.{js,jsx}": [
+    "client/src/**/*.{js,jsx}": [
       "npm run client:lint"
     ],
     "server/**/*.js": [
