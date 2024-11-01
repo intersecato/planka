@@ -67,6 +67,12 @@ services:
 
       # - SLACK_BOT_TOKEN=
       # - SLACK_CHANNEL_ID=
+
+      # - GOOGLE_CHAT_WEBHOOK_URL=
+
+      # - TELEGRAM_BOT_TOKEN=
+      # - TELEGRAM_CHAT_ID=
+      # - TELEGRAM_THREAD_ID=
     working_dir: /app
     command: ["sh", "-c", "npm run start"]
     depends_on:
