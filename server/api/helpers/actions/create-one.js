@@ -23,16 +23,16 @@ const buildAndSendMarkdownMessage = async (card, action, actorUser, send) => {
   let markdown;
   switch (action.type) {
     case Action.Types.CREATE_CARD:
-      markdown = `${cardLink} was created by ${actorUser.name} in *${action.data.list.name}*`;
+      markdown = `La task ${cardLink} è stata creata da ${actorUser.name} nella sezione *${action.data.list.name}*`;
 
       break;
     case Action.Types.MOVE_CARD:
-      markdown = `${cardLink} was moved by ${actorUser.name} to *${action.data.toList.name}*`;
+      markdown = `La task ${cardLink} è stata spostata da ${actorUser.name} nella sezione *${action.data.toList.name}*`;
 
       break;
     case Action.Types.COMMENT_CARD:
       // TODO: truncate text?
-      markdown = `*${actorUser.name}* commented on ${cardLink}:\n>${action.data.text}`;
+      markdown = `*${actorUser.name}* ha commentato in ${cardLink}:\n>${action.data.text}`;
 
       break;
     default:
@@ -48,15 +48,15 @@ const buildAndSendHtmlMessage = async (card, action, actorUser, send) => {
   let html;
   switch (action.type) {
     case Action.Types.CREATE_CARD:
-      html = `${cardLink} was created by ${actorUser.name} in <b>${action.data.list.name}</b>`;
+      html = `La task ${cardLink} è stata creata da ${actorUser.name} nella sezione <b>${action.data.list.name}</b>`;
 
       break;
     case Action.Types.MOVE_CARD:
-      html = `${cardLink} was moved by ${actorUser.name} to <b>${action.data.toList.name}</b>`;
+      html = `La task ${cardLink} è stata spostata da ${actorUser.name} nella sezione <b>${action.data.toList.name}</b>`;
 
       break;
     case Action.Types.COMMENT_CARD: {
-      html = `<b>${actorUser.name}</b> commented on ${cardLink}:\n<i>${truncateString(action.data.text)}</i>`;
+      html = `<b>${actorUser.name}</b> ha commentato in ${cardLink}:\n<i>${truncateString(action.data.text)}</i>`;
 
       break;
     }
