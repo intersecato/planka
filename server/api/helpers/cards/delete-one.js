@@ -1,9 +1,9 @@
 const buildAndSendMarkdownMessage = async (card, actorUser, send) => {
-  await send(`*${card.name}* was deleted by ${actorUser.name}`);
+  await send(`La task *${card.name}* è stata cancellata da ${actorUser.name}`);
 };
 
 const buildAndSendHtmlMessage = async (card, actorUser, send) => {
-  await send(`<b>${card.name}</b> was deleted by ${actorUser.name}`);
+  await send(`La task <b>${card.name}</b> è stata cancellata da ${actorUser.name}`);
 };
 
 module.exports = {
