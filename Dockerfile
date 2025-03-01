@@ -34,7 +34,6 @@ USER node
 WORKDIR /app
 
 COPY --chown=node:node start.sh .
-COPY --chown=node:node healthcheck.js .
 COPY --chown=node:node server .
 
 RUN mv .env.sample .env
@@ -50,7 +49,5 @@ VOLUME /app/private/attachments
 
 EXPOSE 1337
 
-HEALTHCHECK --interval=10s --timeout=2s --start-period=15s \
-  CMD node ./healthcheck.js
 
-CMD ["./start.sh"]
+CMD [ "bash", "start.sh" ]
